@@ -2,7 +2,6 @@ package za.ac.cput.dogparlor.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import za.ac.cput.dogparlor.domain.Address;
 import za.ac.cput.dogparlor.domain.Contact;
 import za.ac.cput.dogparlor.domain.ContactType;
 import za.ac.cput.dogparlor.domain.Customer;
