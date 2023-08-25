@@ -1,6 +1,5 @@
 package za.ac.cput.dogparlor.factory;
 
-import za.ac.cput.dogparlor.domain.Address;
 import za.ac.cput.dogparlor.domain.Contact;
 import za.ac.cput.dogparlor.domain.Customer;
 import za.ac.cput.dogparlor.util.Helper;
