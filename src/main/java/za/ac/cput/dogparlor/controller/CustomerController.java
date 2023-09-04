@@ -1,6 +1,7 @@
 package za.ac.cput.dogparlor.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.StreamingHttpOutputMessage;
 import org.springframework.web.bind.annotation.*;
 import za.ac.cput.dogparlor.domain.Contact;
 import za.ac.cput.dogparlor.domain.ContactType;
@@ -22,7 +23,7 @@ public class CustomerController {
     public Customer createCustomer(@RequestBody Customer customer) {
         Customer customer1 = CustomerFactory.createCustomer(customer.getFirstName(), customer.getLastName(),
                 customer.getContacts(), customer.getAddresses());
-
+        System.out.println(customer1);
         return customerService.create(customer1);
     }
 

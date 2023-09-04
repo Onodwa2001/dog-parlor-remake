@@ -15,10 +15,8 @@ public class Staff implements Serializable {
     private String firstName, lastName;
     private String speciality;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Role role;
-    @ManyToMany
-    private List<Booking> bookings = new ArrayList<>();
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Role> role = new ArrayList<>();
 
     protected Staff() {}
 
@@ -28,7 +26,6 @@ public class Staff implements Serializable {
         this.lastName = builder.lastName;
         this.role = builder.role;
         this.speciality = builder.speciality;
-        this.bookings = builder.bookings;
     }
 
 
@@ -48,25 +45,22 @@ public class Staff implements Serializable {
         return speciality;
     }
 
-    public Role getRole() {
+    public List<Role> getRole() {
         return role;
     }
 
-    public List<Booking> getBookings() {
-        return bookings;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Staff staff = (Staff) o;
-        return Objects.equals(staffNumber, staff.staffNumber) && Objects.equals(firstName, staff.firstName) && Objects.equals(lastName, staff.lastName) && Objects.equals(speciality, staff.speciality) && Objects.equals(role, staff.role) && Objects.equals(bookings, staff.bookings);
+        return Objects.equals(staffNumber, staff.staffNumber) && Objects.equals(firstName, staff.firstName) && Objects.equals(lastName, staff.lastName) && Objects.equals(speciality, staff.speciality) && Objects.equals(role, staff.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(staffNumber, firstName, lastName, speciality, role, bookings);
+        return Objects.hash(staffNumber, firstName, lastName, speciality, role);
     }
 
     @Override
@@ -77,18 +71,15 @@ public class Staff implements Serializable {
                 ", lastName='" + lastName + '\'' +
                 ", speciality='" + speciality + '\'' +
                 ", role=" + role +
-                ", bookings=" + bookings +
                 '}';
     }
-
 
     public static class Builder {
 
         private String staffNumber;
         private String firstName, lastName;
         private String speciality;
-        private Role role;
-        private List<Booking> bookings = new ArrayList<>();
+        private List<Role> role;
 
         public Builder() {}
 
@@ -112,15 +103,11 @@ public class Staff implements Serializable {
             return this;
         }
 
-        public Builder setRole(Role role) {
+        public Builder setRole(List<Role> role) {
             this.role = role;
             return this;
         }
 
-        public Builder setBookings(List<Booking> bookings) {
-            this.bookings = bookings;
-            return this;
-        }
 
         public Builder copy(final Staff staff) {
             this.staffNumber = staff.staffNumber;
@@ -128,7 +115,6 @@ public class Staff implements Serializable {
             this.lastName = staff.lastName;
             this.role = staff.role;
             this.speciality = staff.speciality;
-            this.bookings = staff.bookings;
             return this;
         }
 

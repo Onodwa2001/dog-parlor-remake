@@ -10,7 +10,7 @@ import java.util.List;
 public class StaffFactory {
 
     public static Staff createStaff(String firstName, String lastName,
-                                    String specialty, Role role, List<Booking> bookings) {
+                                    String specialty, List<Role> role) {
         if (Helper.isNullOrEmpty(firstName) || Helper.isNullOrEmpty(lastName)
                 || Helper.isNullOrEmpty(specialty))
             return null;
@@ -26,7 +26,6 @@ public class StaffFactory {
                 .setLastName(lastName)
                 .setSpeciality(specialty)
                 .setRole(role)
-                .setBookings(bookings)
                 .build();
     }
 

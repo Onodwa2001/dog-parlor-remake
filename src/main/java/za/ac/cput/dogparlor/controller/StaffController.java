@@ -2,7 +2,9 @@ package za.ac.cput.dogparlor.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import za.ac.cput.dogparlor.domain.Role;
 import za.ac.cput.dogparlor.domain.Staff;
+import za.ac.cput.dogparlor.factory.RoleFactory;
 import za.ac.cput.dogparlor.factory.StaffFactory;
 import za.ac.cput.dogparlor.service.impl.StaffService;
 
@@ -16,10 +18,10 @@ public class StaffController {
     private StaffService staffService;
 
     @PostMapping("/create")
-    public Staff createStaff(@RequestParam Staff staff){
-        Staff createdStaff = StaffFactory.createStaff(staff.getFirstName(),staff.getLastName(),staff.getSpeciality(),staff.getRole(),staff.getBookings());
-        return staffService.create(createdStaff) ;
-
+    public Staff createStaff(@RequestBody Staff staff){
+        Staff createdStaff = StaffFactory.createStaff(staff.getFirstName(),staff.getLastName(),
+                staff.getSpeciality(),staff.getRole());
+        return staffService.create(createdStaff);
     }
 
     @PostMapping("/update")

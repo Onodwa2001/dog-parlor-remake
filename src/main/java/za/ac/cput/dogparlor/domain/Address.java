@@ -1,9 +1,9 @@
 package za.ac.cput.dogparlor.domain;
 
-        import jakarta.persistence.*;
+import jakarta.persistence.*;
 
-        import java.io.Serializable;
-        import java.util.Objects;
+import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 public class Address implements Serializable {

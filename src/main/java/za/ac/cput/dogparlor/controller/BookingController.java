@@ -16,10 +16,10 @@ public class BookingController {
 
     @PostMapping("/create")
     public Booking createBooking(@RequestParam Booking booking){
-        Booking createdBooking = BookingFactory.createBooking(booking.getStaffID(), booking.getBookingDate(),booking.getServices(),booking.getTotal());
+        Booking createdBooking = BookingFactory.createBooking(booking.getBookingDate(), booking.getCustomer(),
+                booking.getStaffList(), booking.getServices(), booking.getExtraServices(), booking.getTotal());
         return bookingService.create(createdBooking);
     }
-
 
     @PostMapping("/update")
     public Booking updateBooking(@RequestBody Booking booking) {

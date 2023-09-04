@@ -21,8 +21,6 @@ public class GroomService implements Serializable {
     private String description;
     private String serviceDuration;
     private double price;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<ExtraService> extraServices = new ArrayList<ExtraService>();
 
     protected GroomService() {}
 
@@ -32,7 +30,6 @@ public class GroomService implements Serializable {
         this.description = builder.description;
         this.serviceDuration = builder.serviceDuration;
         this.price = builder.price;
-        this.extraServices = builder.extraServices;
     }
 
     public String getServiceId() {
@@ -57,33 +54,27 @@ public class GroomService implements Serializable {
         return price;
     }
 
-    public List<ExtraService> getExtraServices() {
-        return extraServices;
-    }
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GroomService groomService = (GroomService) o;
-        return Double.compare(groomService.price, price) == 0 && Objects.equals(serviceId, groomService.serviceId) && Objects.equals(name, groomService.name) && Objects.equals(description, groomService.description) && Objects.equals(serviceDuration, groomService.serviceDuration) && Objects.equals(extraServices, groomService.extraServices);
+        GroomService that = (GroomService) o;
+        return Double.compare(price, that.price) == 0 && Objects.equals(serviceId, that.serviceId) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(serviceDuration, that.serviceDuration);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(serviceId, name, description, serviceDuration, price, extraServices);
+        return Objects.hash(serviceId, name, description, serviceDuration, price);
     }
 
     @Override
     public String toString() {
-        return "Service{" +
+        return "GroomService{" +
                 "serviceId='" + serviceId + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", serviceDuration='" + serviceDuration + '\'' +
                 ", price=" + price +
-                ", extraServices=" + extraServices +
                 '}';
     }
 
@@ -93,7 +84,6 @@ public class GroomService implements Serializable {
         private String description;
         private String serviceDuration;
         private double price;
-        private List<ExtraService> extraServices = new ArrayList<ExtraService>();
 
 
         public Builder() {}
@@ -122,18 +112,12 @@ public class GroomService implements Serializable {
             return this;
         }
 
-        public Builder setExtraServices(List<ExtraService> extraServices) {
-            this.extraServices = extraServices;
-            return this;
-        }
-
         public Builder copy(GroomService groomService) {
             this.serviceId = groomService.serviceId;
             this.name = groomService.name;
             this.price = groomService.price;
             this.serviceDuration = groomService.serviceDuration;
             this.description = groomService.description;
-            this.extraServices = groomService.extraServices;
             return this;
         }
 

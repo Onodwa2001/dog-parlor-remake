@@ -11,8 +11,6 @@ public class ContactFactory {
         if (!Helper.isNullOrEmpty(contactValue))
             return null;
 
-        String contactID = Helper.generateID();
-
         if (contactType.isEmail()) {
             System.out.println("It's an email");
             if (!Helper.isValidEmail(contactValue))
@@ -23,7 +21,7 @@ public class ContactFactory {
                 return null;
         }
 
-        return new Contact.Builder().setContactID(contactID)
+        return new Contact.Builder()
                 .setContactValue(contactValue)
                 .setContactType(contactType)
                 .build();

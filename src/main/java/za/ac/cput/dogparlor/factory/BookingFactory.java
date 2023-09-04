@@ -1,8 +1,6 @@
 package za.ac.cput.dogparlor.factory;
 
-import za.ac.cput.dogparlor.domain.Booking;
-import za.ac.cput.dogparlor.domain.GroomService;
-import za.ac.cput.dogparlor.domain.Staff;
+import za.ac.cput.dogparlor.domain.*;
 import za.ac.cput.dogparlor.util.Helper;
 
 import java.time.LocalDateTime;
@@ -10,16 +8,14 @@ import java.util.List;
 
 public class BookingFactory {
 
-    public static Booking createBooking(List<Staff> staff, LocalDateTime bookingDate,
-                                        List<GroomService> groomServices, double total) {
+    public static Booking createBooking(LocalDateTime bookingDate, Customer customer, List<Staff> staffList,
+                                        List<GroomService> groomServices, List<ExtraService> extraServices, double total) {
 
-        if (staff == null)
-            return null;
 
         if (bookingDate == null || (Helper.isNullOrEmpty(bookingDate.getMonth().toString())))
             return null;
 
-        if (groomServices == null)
+        if (groomServices.isEmpty())
             return null;
 
         if (total < 1)
@@ -29,9 +25,11 @@ public class BookingFactory {
 
         return new Booking.Builder()
                 .setBookingID(bookingID)
-                .setStaff(staff)
                 .setBookingDate(bookingDate)
+                .setCustomer(customer)
+                .setStaffList(staffList)
                 .setServices(groomServices)
+                .setExtraServices(extraServices)
                 .setTotal(total)
                 .build();
     }
