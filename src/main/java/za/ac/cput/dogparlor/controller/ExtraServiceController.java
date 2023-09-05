@@ -22,7 +22,7 @@ public class ExtraServiceController {
         return service.create(generatedExtraService);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{id}")
     public boolean delete(@PathVariable String id) {
         return service.delete(id);
     }

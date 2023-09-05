@@ -15,9 +15,10 @@ public class BookingController {
     private BookingService bookingService;
 
     @PostMapping("/create")
-    public Booking createBooking(@RequestParam Booking booking){
-        Booking createdBooking = BookingFactory.createBooking(booking.getBookingDate(), booking.getCustomer(),
-                booking.getStaffList(), booking.getServices(), booking.getExtraServices(), booking.getTotal());
+    public Booking createBooking(@RequestBody Booking booking){
+        Booking createdBooking = BookingFactory.createBooking(booking.getCustomer(),
+                booking.getStaffList(), booking.getGroomServices(), booking.getExtraServices(), booking.getTotal());
+        System.out.println(createdBooking);
         return bookingService.create(createdBooking);
     }
 

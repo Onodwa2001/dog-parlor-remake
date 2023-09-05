@@ -111,8 +111,7 @@ public class GroomService implements Serializable {
             this.price = price;
             return this;
         }
-
-        public Builder copy(GroomService groomService) {
+        public Builder copy(final GroomService groomService) {
             this.serviceId = groomService.serviceId;
             this.name = groomService.name;
             this.price = groomService.price;

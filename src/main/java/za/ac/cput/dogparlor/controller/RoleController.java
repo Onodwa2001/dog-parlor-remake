@@ -16,7 +16,7 @@ public class RoleController {
     private RoleService service;
 
     @PostMapping("/create")
-    public Role createRole(@RequestParam Role role){
+    public Role createRole(@RequestBody Role role){
         Role create = RoleFactory.createRole(role.getName());
         return service.create(create);
     }
@@ -41,3 +41,4 @@ public class RoleController {
         return service.getAll();
     }
 }
+

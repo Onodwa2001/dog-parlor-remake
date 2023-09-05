@@ -23,7 +23,7 @@ public class Booking implements Serializable {
     private List<Staff> staffList = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<GroomService> groomServices = new ArrayList<GroomService>();
+    private List<GroomService> groomServices = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<ExtraService> extraServices = new ArrayList<>();
@@ -59,7 +59,7 @@ public class Booking implements Serializable {
         return staffList;
     }
 
-    public List<GroomService> getServices() {
+    public List<GroomService> getGroomServices() {
         return groomServices;
     }
 
@@ -129,7 +129,7 @@ public class Booking implements Serializable {
             return this;
         }
 
-        public Builder setServices(List<GroomService> groomServices) {
+        public Builder setGroomServices(List<GroomService> groomServices) {
             this.groomServices = groomServices;
             return this;
         }
