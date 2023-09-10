@@ -21,6 +21,7 @@ public class GroomService implements Serializable {
     private String description;
     private String serviceDuration;
     private double price;
+    private String image;
 
     protected GroomService() {}
 
@@ -30,6 +31,7 @@ public class GroomService implements Serializable {
         this.description = builder.description;
         this.serviceDuration = builder.serviceDuration;
         this.price = builder.price;
+        this.image = builder.image;
     }
 
     public String getServiceId() {
@@ -54,17 +56,21 @@ public class GroomService implements Serializable {
         return price;
     }
 
+    public String getImage() {
+        return image;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GroomService that = (GroomService) o;
-        return Double.compare(price, that.price) == 0 && Objects.equals(serviceId, that.serviceId) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(serviceDuration, that.serviceDuration);
+        return Double.compare(price, that.price) == 0 && Objects.equals(serviceId, that.serviceId) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(serviceDuration, that.serviceDuration) && Objects.equals(image, that.image);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(serviceId, name, description, serviceDuration, price);
+        return Objects.hash(serviceId, name, description, serviceDuration, price, image);
     }
 
     @Override
@@ -75,6 +81,7 @@ public class GroomService implements Serializable {
                 ", description='" + description + '\'' +
                 ", serviceDuration='" + serviceDuration + '\'' +
                 ", price=" + price +
+                ", image='" + image + '\'' +
                 '}';
     }
 
@@ -84,7 +91,7 @@ public class GroomService implements Serializable {
         private String description;
         private String serviceDuration;
         private double price;
-
+        private String image;
 
         public Builder() {}
         public Builder setServiceId(String serviceId) {
@@ -111,12 +118,19 @@ public class GroomService implements Serializable {
             this.price = price;
             return this;
         }
+
+        public Builder setImage(String image) {
+            this.image = image;
+            return this;
+        }
+
         public Builder copy(final GroomService groomService) {
             this.serviceId = groomService.serviceId;
             this.name = groomService.name;
             this.price = groomService.price;
             this.serviceDuration = groomService.serviceDuration;
             this.description = groomService.description;
+            this.image = groomService.image;
             return this;
         }
 

@@ -2,6 +2,8 @@ package za.ac.cput.dogparlor.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import za.ac.cput.dogparlor.domain.Contact;
+import za.ac.cput.dogparlor.domain.Customer;
 import za.ac.cput.dogparlor.domain.GroomService;
 import za.ac.cput.dogparlor.repository.GroomServiceRepository;
 import za.ac.cput.dogparlor.service.IGroomServiceService;
@@ -46,7 +48,7 @@ public class GroomServiceServiceImpl implements IGroomServiceService {
 
     @Override
     public List<GroomService> getAll() {
-        return null;
+        return repository.findAll();
     }
 
 }

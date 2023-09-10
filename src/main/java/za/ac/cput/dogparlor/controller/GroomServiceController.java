@@ -19,7 +19,8 @@ public class GroomServiceController {
     @PostMapping("/create")
     public GroomService create(@RequestBody GroomService groomService) {
         GroomService createdGroomService = GroomServiceFactory.createService(groomService.getName(),
-                groomService.getDescription(), groomService.getServiceDuration(), groomService.getPrice());
+                groomService.getDescription(), groomService.getServiceDuration(),
+                groomService.getPrice(), groomService.getImage());
 
         return groomServiceService.create(createdGroomService);
     }

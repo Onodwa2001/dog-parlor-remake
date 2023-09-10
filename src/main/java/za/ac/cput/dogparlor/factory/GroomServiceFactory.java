@@ -9,7 +9,7 @@ import java.util.List;
 public class GroomServiceFactory {
 
     public static GroomService createService(String name, String description,
-                                             String serviceDuration, double price) {
+                                             String serviceDuration, double price, String image) {
         if (Helper.isNullOrEmpty(name) || Helper.isNullOrEmpty(description)
                 || Helper.isNullOrEmpty(serviceDuration) || price < 0)
             return null;
@@ -22,6 +22,7 @@ public class GroomServiceFactory {
                 .setDescription(description)
                 .setServiceDuration(serviceDuration)
                 .setPrice(price)
+                .setImage(image)
                 .build();
     }
 
