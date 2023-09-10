@@ -1,3 +1,9 @@
+/* DogController.java
+  Entity for the Dog
+  Author: Byron Young (218155077)
+  Date:27 August 2023
+ */
+
 package za.ac.cput.dogparlor.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;

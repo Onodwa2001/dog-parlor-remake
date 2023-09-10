@@ -10,13 +10,13 @@ import java.time.LocalDateTime;
 public class PaymentHistoryFactory {
 
     public static PaymentHistory createPaymentHistory(Booking booking, double amount,
-                                                      LocalDateTime paymentDate, String paymentMethod) {
+                                                      String paymentMethod) {
 
         if (booking == null || amount < 0 || Helper.isNullOrEmpty(paymentMethod))
             return null;
 
         String paymentID = Helper.generateID();
-
+        LocalDateTime paymentDate = LocalDateTime.now();
         return new PaymentHistory.Builder()
                 .setPaymentID(paymentID)
                 .setAmount(amount)
