@@ -32,4 +32,6 @@ public class BookingFactory {
                 .build();
     }
 
+    public static void createBooking(String zee, String number, String number1, String washing) {
+    }
 }

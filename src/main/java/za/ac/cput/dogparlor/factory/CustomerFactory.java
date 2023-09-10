@@ -5,7 +5,6 @@ import za.ac.cput.dogparlor.domain.Contact;
 import za.ac.cput.dogparlor.domain.Customer;
 import za.ac.cput.dogparlor.util.Helper;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class CustomerFactory {
@@ -26,6 +25,9 @@ public class CustomerFactory {
                 .setAddresses(addresses)
                 .build();
 
+    }
+
+    public static void createCustomer(int i, int i1) {
     }
 
 }

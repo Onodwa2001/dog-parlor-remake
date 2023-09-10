@@ -2,13 +2,10 @@ package za.ac.cput.dogparlor.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import za.ac.cput.dogparlor.domain.Contact;
 import za.ac.cput.dogparlor.domain.Customer;
-import za.ac.cput.dogparlor.repository.ContactRepository;
 import za.ac.cput.dogparlor.repository.CustomerRepository;
 import za.ac.cput.dogparlor.service.ICustomerService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -52,6 +49,11 @@ public class CustomerService implements ICustomerService {
     @Override
     public List<Customer> getAll() {
         return repository.findAll();
+    }
+
+    public String getCustomerID() {
+        String o = null;
+        return o;
     }
 
 //    @Override

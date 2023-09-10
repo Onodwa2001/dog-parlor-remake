@@ -11,12 +11,12 @@ import java.util.Objects;
 public class Customer implements Serializable {
 
     @Id
-    private String customerID;
-    private String firstName;
-    private String lastName;
+    private List<Address> customerID;
+    private List<Address> firstName;
+    private List<Address> lastName;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Contact> contacts = new ArrayList<Contact>();
+    private List<Address> contacts = new ArrayList<Address>();
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Address> addresses = new ArrayList<Address>();
@@ -35,15 +35,15 @@ public class Customer implements Serializable {
         return customerID;
     }
 
-    public String getFirstName() {
+    public List<Address> getFirstName() {
         return firstName;
     }
 
-    public String getLastName() {
+    public List<Address> getLastName() {
         return lastName;
     }
 
-    public List<Contact> getContacts() {
+    public List<Address> getContacts() {
         return contacts;
     }
 
@@ -75,33 +75,38 @@ public class Customer implements Serializable {
                 '}';
     }
 
+    public int create(Customer customer) {
+
+        return 0;
+    }
+
     public static class Builder {
 
-        private String customerID;
-        private String firstName;
-        private String lastName;
+        private List<Address> customerID;
+        private List<Address> firstName;
+        private List<Address> lastName;
 
-        private List<Contact> contacts = new ArrayList<Contact>();
+        private List<Address> contacts = new ArrayList<Address>();
         private List<Address> addresses = new ArrayList<Address>();
 
         public Builder() {}
 
-        public Builder setCustomerID(String customerID) {
+        public Builder setCustomerID(List<Address> customerID) {
             this.customerID = customerID;
             return this;
         }
 
-        public Builder setFirstName(String firstName) {
+        public Builder setFirstName(List<Address> firstName) {
             this.firstName = firstName;
             return this;
         }
 
-        public Builder setLastName(String lastName) {
+        public Builder setLastName(List<Address> lastName) {
             this.lastName = lastName;
             return this;
         }
 
-        public Builder setContacts(List<Contact> contacts) {
+        public Builder setContacts(List<Address> contacts) {
             this.contacts = contacts;
             return this;
         }
@@ -111,12 +116,12 @@ public class Customer implements Serializable {
             return this;
         }
 
-        public Builder copy(Customer customer) {
-            this.customerID = customer.customerID;
-            this.firstName = customer.firstName;
-            this.lastName = customer.lastName;
-            this.contacts = customer.contacts;
-            this.addresses = customer.addresses;
+        public Builder copy(List<Address> customer) {
+            this.customerID = customer;
+            this.firstName = customer;
+            this.lastName = customer;
+            this.contacts = customer;
+            this.addresses = customer;
             return this;
         }
 

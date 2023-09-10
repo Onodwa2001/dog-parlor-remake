@@ -8,6 +8,10 @@ import java.util.List;
 
 public interface ICustomerService extends IService<Customer, String> {
 
+    Customer update(Customer customer);
+
+    boolean delete(String id);
+
     List<Customer> getAll();
 
 }

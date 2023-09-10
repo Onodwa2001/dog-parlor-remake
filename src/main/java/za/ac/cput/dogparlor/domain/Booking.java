@@ -159,4 +159,9 @@ public class Booking implements Serializable {
 
     }
 
+    public static class BookingBuilder {
+        public void copy(Booking booking) {
+
+        }
+    }
 }
