@@ -10,4 +10,6 @@ public interface ICustomerService extends IService<Customer, String> {
 
     List<Customer> getAll();
 
+    Customer getCustomerIfExists(Contact contact);
+
 }

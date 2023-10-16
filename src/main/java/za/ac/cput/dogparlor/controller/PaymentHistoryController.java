@@ -17,7 +17,7 @@ public class PaymentHistoryController {
     private PaymentHistoryService service;
 
     @PostMapping("/create")
-    public PaymentHistory create(@RequestParam PaymentHistory history){
+    public PaymentHistory create(@RequestBody PaymentHistory history){
         PaymentHistory create = PaymentHistoryFactory.createPaymentHistory(history.getBooking(), history.getAmount(), history.getPaymentMethod());
         return service.create(create);
     }

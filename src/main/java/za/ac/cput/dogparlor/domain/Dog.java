@@ -17,7 +17,7 @@ public class Dog implements Serializable {
     @Id
     private String dogTag;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Customer customer;
     private String dogName;
     private String breed;

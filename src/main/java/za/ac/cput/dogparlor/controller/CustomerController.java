@@ -32,6 +32,11 @@ public class CustomerController {
         return customerService.read(id);
     }
 
+    @PostMapping("/login")
+    public Customer login(@RequestBody Contact contact) {
+        return customerService.getCustomerIfExists(contact);
+    }
+
     @PostMapping("/update")
     public Customer updateCustomer(@RequestBody Customer customer) {
         return customerService.update(customer);

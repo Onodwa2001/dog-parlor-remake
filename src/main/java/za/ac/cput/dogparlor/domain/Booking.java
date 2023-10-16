@@ -22,8 +22,8 @@ public class Booking implements Serializable {
 
     private LocalDateTime bookingDate;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Customer customer;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Dog dog;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Staff> staffList = new ArrayList<>();
@@ -41,7 +41,7 @@ public class Booking implements Serializable {
     private Booking(Builder builder) {
         this.bookingID = builder.bookingID;
         this.bookingDate = builder.bookingDate;
-        this.customer = builder.customer;
+        this.dog = builder.dog;
         this.staffList = builder.staffList;
         this.groomServices = builder.groomServices;
         this.extraServices = builder.extraServices;
@@ -57,8 +57,8 @@ public class Booking implements Serializable {
         return bookingDate;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Dog getDog() {
+        return dog;
     }
 
     public List<Staff> getStaffList() {
@@ -82,12 +82,12 @@ public class Booking implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Booking booking = (Booking) o;
-        return Double.compare(total, booking.total) == 0 && Objects.equals(bookingID, booking.bookingID) && Objects.equals(bookingDate, booking.bookingDate) && Objects.equals(customer, booking.customer) && Objects.equals(staffList, booking.staffList) && Objects.equals(groomServices, booking.groomServices) && Objects.equals(extraServices, booking.extraServices);
+        return Double.compare(total, booking.total) == 0 && Objects.equals(bookingID, booking.bookingID) && Objects.equals(bookingDate, booking.bookingDate) && Objects.equals(dog, booking.dog) && Objects.equals(staffList, booking.staffList) && Objects.equals(groomServices, booking.groomServices) && Objects.equals(extraServices, booking.extraServices);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bookingID, bookingDate, customer, staffList, groomServices, extraServices, total);
+        return Objects.hash(bookingID, bookingDate, dog, staffList, groomServices, extraServices, total);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class Booking implements Serializable {
         return "Booking{" +
                 "bookingID='" + bookingID + '\'' +
                 ", bookingDate=" + bookingDate +
-                ", customer=" + customer +
+                ", dog=" + dog +
                 ", staffList=" + staffList +
                 ", groomServices=" + groomServices +
                 ", extraServices=" + extraServices +
@@ -107,7 +107,7 @@ public class Booking implements Serializable {
 
         private String bookingID;
         private LocalDateTime bookingDate;
-        private Customer customer;
+        private Dog dog;
         private List<Staff> staffList = new ArrayList<>();
         private List<GroomService> groomServices = new ArrayList<>();
         private List<ExtraService> extraServices = new ArrayList<>();
@@ -125,8 +125,8 @@ public class Booking implements Serializable {
             return this;
         }
 
-        public Builder setCustomer(Customer customer) {
-            this.customer = customer;
+        public Builder setDog(Dog dog) {
+            this.dog = dog;
             return this;
         }
 
@@ -153,7 +153,7 @@ public class Booking implements Serializable {
         public Builder copy(Booking booking) {
             this.bookingID = booking.bookingID;
             this.bookingDate = booking.bookingDate;
-            this.customer = booking.customer;
+            this.dog = booking.dog;
             this.staffList = booking.staffList;
             this.groomServices = booking.groomServices;
             this.extraServices = booking.extraServices;

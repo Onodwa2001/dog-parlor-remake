@@ -8,8 +8,6 @@ public class DogFactory {
 
     public static Dog createDog(String dogTag, Customer customer, String dogName,
                                 String breed, int age, String dogSize, String hairLength) {
-        if (customer == null)
-            return null;
 
         if (Helper.isNullOrEmpty(dogName) || Helper.isNullOrEmpty(breed)
                 || Helper.isNullOrEmpty(dogSize) || Helper.isNullOrEmpty(hairLength))
@@ -20,6 +18,7 @@ public class DogFactory {
 
         return new Dog.Builder()
                 .setDogTag(dogTag)
+                .setCustomerID(customer)
                 .setDogName(dogName)
                 .setBreed(breed)
                 .setAge(age)

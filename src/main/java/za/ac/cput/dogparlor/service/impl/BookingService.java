@@ -42,7 +42,6 @@ public class BookingService implements IBookingService {
         if (repository.existsById(id)){
             repository.deleteById(id);
             return true;
-
         }
         return false;
     }

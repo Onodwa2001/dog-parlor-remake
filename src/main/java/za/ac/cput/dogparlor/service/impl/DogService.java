@@ -8,6 +8,7 @@ package za.ac.cput.dogparlor.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import za.ac.cput.dogparlor.domain.Customer;
 import za.ac.cput.dogparlor.domain.Dog;
 import za.ac.cput.dogparlor.repository.DogRepository;
 import za.ac.cput.dogparlor.service.IDogService;
@@ -20,7 +21,9 @@ public class DogService implements IDogService {
     private final DogRepository repository;
 
     @Autowired
-    private DogService(DogRepository dogRepository){this.repository = dogRepository;}
+    private DogService(DogRepository dogRepository){
+        this.repository = dogRepository;
+    }
 
     @Override
     public Dog create(Dog dog) {
@@ -44,9 +47,12 @@ public class DogService implements IDogService {
         if (repository.existsById(id)){
             repository.deleteById(id);
             return true;
-
         }
         return false;
+    }
+
+    public List<Dog> getAllByCustomer(Customer customer) {
+        return repository.getDogByCustomer(customer);
     }
 
     @Override

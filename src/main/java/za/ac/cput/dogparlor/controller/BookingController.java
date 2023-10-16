@@ -11,6 +11,7 @@ import za.ac.cput.dogparlor.domain.Booking;
 import za.ac.cput.dogparlor.factory.BookingFactory;
 import za.ac.cput.dogparlor.service.impl.BookingService;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -21,9 +22,11 @@ public class BookingController {
 
     @PostMapping("/create")
     public Booking createBooking(@RequestBody Booking booking){
-        Booking createdBooking = BookingFactory.createBooking(booking.getCustomer(),
+        System.out.println(booking);
+        Booking createdBooking = BookingFactory.createBooking(booking.getDog(),
                 booking.getStaffList(), booking.getGroomServices(), booking.getExtraServices(), booking.getTotal());
         System.out.println(createdBooking);
+
         return bookingService.create(createdBooking);
     }
 
@@ -36,9 +39,6 @@ public class BookingController {
     public boolean deleteBooking(@PathVariable String id) {
         return bookingService.delete(id);
     }
-
-
-
 
     @GetMapping("/getall")
     public List<Booking> getAll() {

@@ -15,12 +15,10 @@ import java.util.List;
 public class CustomerService implements ICustomerService {
 
     private final CustomerRepository repository;
-    private final ContactService contactService;
 
     @Autowired
-    private CustomerService(CustomerRepository customerRepository, ContactService contactService) {
+    private CustomerService(CustomerRepository customerRepository) {
         this.repository = customerRepository;
-        this.contactService = contactService;
     }
 
     @Override
@@ -54,15 +52,21 @@ public class CustomerService implements ICustomerService {
         return repository.findAll();
     }
 
-//    @Override
-//    public Customer getCustomerIfExists(Contact contactParam) {
-//        List<Contact> contacts = contactService.getAll();
-//        Contact retrievedCustomer = null;
-//        for (Contact contact : contacts) {
-//            if (contact.getContactValue().equals(contactParam.getContactValue()))
-//                retrievedCustomer = contact;
-//        }
-//        System.out.println(retrievedCustomer);
-//    }
+    @Override
+    public Customer getCustomerIfExists(Contact contactParam) {
+        List<Customer> customers = getAll();
+        Customer retrievedCustomer = null;
+
+        for (Customer customer : customers) {
+            for (Contact contact : customer.getContacts()) {
+                if (contact.getContactValue().equals(contactParam.getContactValue())) {
+                    retrievedCustomer = customer;
+                    break;
+                }
+            }
+        }
+
+        return retrievedCustomer;
+    }
 
 }

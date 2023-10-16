@@ -17,7 +17,6 @@ public class Customer implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Contact> contacts = new ArrayList<Contact>();
-
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Address> addresses = new ArrayList<Address>();
 

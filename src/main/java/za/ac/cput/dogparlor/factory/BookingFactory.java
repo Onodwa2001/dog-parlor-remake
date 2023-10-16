@@ -8,7 +8,7 @@ import java.util.List;
 
 public class BookingFactory {
 
-    public static Booking createBooking(Customer customer, List<Staff> staffList,
+    public static Booking createBooking(Dog dog, List<Staff> staffList,
                                         List<GroomService> groomServices, List<ExtraService> extraServices, double total) {
 
         if (groomServices.isEmpty())
@@ -24,7 +24,7 @@ public class BookingFactory {
         return new Booking.Builder()
                 .setBookingID(bookingID)
                 .setBookingDate(bookingDate)
-                .setCustomer(customer)
+                .setDog(dog)
                 .setStaffList(staffList)
                 .setGroomServices(groomServices)
                 .setExtraServices(extraServices)

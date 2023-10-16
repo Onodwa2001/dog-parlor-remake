@@ -8,6 +8,7 @@ package za.ac.cput.dogparlor.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import za.ac.cput.dogparlor.domain.Customer;
 import za.ac.cput.dogparlor.domain.Dog;
 import za.ac.cput.dogparlor.factory.DogFactory;
 import za.ac.cput.dogparlor.service.impl.DogService;
@@ -22,8 +23,9 @@ public class DogController {
     private DogService dogService;
 
     @PostMapping("/create")
-    public Dog createDog(@RequestParam Dog dog){
-        Dog createdDog = DogFactory.createDog(dog.getDogTag(),dog.getCustomer(),dog.getDogName(), dog.getBreed(),dog.getAge(),dog.getDogSize(),dog.getHairLength());
+    public Dog createDog(@RequestBody Dog dog){
+        Dog createdDog = DogFactory.createDog(dog.getDogTag(),dog.getCustomer(),dog.getDogName(),
+                dog.getBreed(),dog.getAge(),dog.getDogSize(),dog.getHairLength());
         return dogService.create(createdDog);
     }
 
@@ -37,6 +39,10 @@ public class DogController {
         return dogService.delete(id);
     }
 
+    @PostMapping("/getall-by-customer")
+    public List<Dog> getAllByCustomerId(@RequestBody Customer customer) {
+        return dogService.getAllByCustomer(customer);
+    }
 
     @GetMapping("/getall")
     public List<Dog> getAll() {

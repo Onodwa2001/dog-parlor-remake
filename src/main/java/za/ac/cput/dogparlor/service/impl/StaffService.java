@@ -23,7 +23,6 @@ public class StaffService implements IStaffService {
         this.repository = staffRepository;
     }
 
-
     @Override
     public Staff create(Staff staff) {
         return repository.save(staff);
