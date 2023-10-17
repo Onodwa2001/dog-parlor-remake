@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import za.ac.cput.dogparlor.domain.Booking;
 import za.ac.cput.dogparlor.factory.BookingFactory;
 import za.ac.cput.dogparlor.service.impl.BookingService;
+import java.time.format.DateTimeFormatter;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,8 +25,9 @@ public class BookingController {
 
     @PostMapping("/create")
     public Booking createBooking(@RequestBody Booking booking){
+
         System.out.println(booking);
-        Booking createdBooking = BookingFactory.createBooking(booking.getDog(),
+        Booking createdBooking = BookingFactory.createBooking(booking.getBookingDate(), booking.getDog(),
                 booking.getStaffList(), booking.getGroomServices(), booking.getExtraServices(), booking.getTotal());
         System.out.println(createdBooking);
 
@@ -43,5 +47,27 @@ public class BookingController {
     @GetMapping("/getall")
     public List<Booking> getAll() {
         return bookingService.getAll();
+    }
+
+    @PostMapping("/unavailable-dates")
+    public HashMap<String, Integer> getUnavailableDates(@RequestBody ArrayList<String> monthYearStringParam) {
+        HashMap<String, Integer> result;
+        try {
+            result = bookingService.getUnavailableDates(monthYearStringParam);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return result;
+    }
+
+    @PostMapping("is-fully-booked")
+    public boolean isFullyBooked(@RequestParam String dateParam) {
+        LocalDateTime date = LocalDateTime.parse(dateParam);
+        return bookingService.isDayFullyBooked(date);
+    }
+
+    @GetMapping("/get-dates")
+    public List<LocalDateTime> getDates() {
+        return bookingService.getAllDatesOnLatestDay();
     }
 }

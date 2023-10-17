@@ -11,4 +11,5 @@ import za.ac.cput.dogparlor.domain.Booking;
 
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, String> {
+
 }

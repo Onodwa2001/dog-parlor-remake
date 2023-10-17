@@ -7,7 +7,8 @@
 package za.ac.cput.dogparlor.domain;
 
 import jakarta.persistence.*;
-
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class Booking implements Serializable {
     @Id
     private String bookingID;
 
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime bookingDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -28,10 +30,10 @@ public class Booking implements Serializable {
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Staff> staffList = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<GroomService> groomServices = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<ExtraService> extraServices = new ArrayList<>();
 
     private double total;

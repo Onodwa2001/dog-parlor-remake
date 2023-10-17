@@ -8,7 +8,7 @@ import java.util.List;
 
 public class BookingFactory {
 
-    public static Booking createBooking(Dog dog, List<Staff> staffList,
+    public static Booking createBooking(LocalDateTime bookingDate, Dog dog, List<Staff> staffList,
                                         List<GroomService> groomServices, List<ExtraService> extraServices, double total) {
 
         if (groomServices.isEmpty())
@@ -19,7 +19,6 @@ public class BookingFactory {
 
         String bookingID = Helper.generateID();
 
-        LocalDateTime bookingDate = LocalDateTime.now();
 
         return new Booking.Builder()
                 .setBookingID(bookingID)
