@@ -77,10 +77,9 @@ public class BookingService implements IBookingService {
 
             List<String> allBookingsInMonth = new ArrayList<>();
 
-            // TODO: Add this code back in condition -> booking.getBookingDate().isAfter(today)
-            //                        &&
             for (Booking booking : repository.findAll()) {
-                if ( booking.getBookingDate().getMonthValue() == desiredMonth
+                if ( booking.getBookingDate().isAfter(today)
+                        && booking.getBookingDate().getMonthValue() == desiredMonth
                         && booking.getBookingDate().getYear() == desiredYear) {
                     String value = booking.getBookingDate().getYear()
                             + "," + booking.getBookingDate().getMonthValue()
@@ -97,6 +96,8 @@ public class BookingService implements IBookingService {
                 int count = Collections.frequency(allBookingsInMonth, date);
                 datesMap.put(date, count);
             }
+
+            System.out.println(datesMap);
 
             return datesMap;
         }

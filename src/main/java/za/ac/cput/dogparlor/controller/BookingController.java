@@ -25,9 +25,11 @@ public class BookingController {
 
     @PostMapping("/create")
     public Booking createBooking(@RequestBody Booking booking){
+        String dateString = booking.getBookingDate().toString();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
 
-        System.out.println(booking);
-        Booking createdBooking = BookingFactory.createBooking(booking.getBookingDate(), booking.getDog(),
+        Booking createdBooking = BookingFactory.createBooking(dateTime, booking.getDog(),
                 booking.getStaffList(), booking.getGroomServices(), booking.getExtraServices(), booking.getTotal());
         System.out.println(createdBooking);
 
