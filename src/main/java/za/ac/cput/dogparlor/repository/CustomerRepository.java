@@ -7,6 +7,7 @@ import za.ac.cput.dogparlor.domain.Customer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, String> {

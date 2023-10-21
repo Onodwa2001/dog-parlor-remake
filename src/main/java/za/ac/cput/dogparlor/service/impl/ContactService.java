@@ -21,4 +21,21 @@ public class ContactService {
         return repository.findAll();
     }
 
+    public List<Contact> create(List<Contact> contacts) {
+        return repository.saveAll(contacts);
+    }
+
+    public boolean delete(String contact) {
+        if (repository.existsById(contact)) {
+            repository.deleteById(contact);
+            return true;
+        }
+        return false;
+    }
+
+    public void deleteAll(List<Contact> contacts) {
+        System.out.println(contacts);
+        repository.deleteAll(contacts);
+    }
+
 }

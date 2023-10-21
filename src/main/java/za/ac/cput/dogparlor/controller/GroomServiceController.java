@@ -1,6 +1,7 @@
 package za.ac.cput.dogparlor.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import za.ac.cput.dogparlor.domain.GroomService;
 import za.ac.cput.dogparlor.factory.GroomServiceFactory;
@@ -15,8 +16,9 @@ public class GroomServiceController {
     @Autowired
     GroomServiceServiceImpl groomServiceService;
 
-    // this controller is for admin
+    // admin
     @PostMapping("/create")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public GroomService create(@RequestBody GroomService groomService) {
         GroomService createdGroomService = GroomServiceFactory.createService(groomService.getName(),
                 groomService.getDescription(), groomService.getServiceDuration(),
@@ -25,12 +27,13 @@ public class GroomServiceController {
         return groomServiceService.create(createdGroomService);
     }
 
+    // customer
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public boolean delete(@PathVariable String id) {
         return groomServiceService.delete(id);
     }
 
-    // will be for admin and users
     @GetMapping("/getall")
     public List<GroomService> getAll() {
         return groomServiceService.getAll();

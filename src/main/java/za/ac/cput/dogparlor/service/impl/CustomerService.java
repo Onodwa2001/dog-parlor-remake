@@ -1,16 +1,17 @@
 package za.ac.cput.dogparlor.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import za.ac.cput.dogparlor.domain.Contact;
 import za.ac.cput.dogparlor.domain.Customer;
-import za.ac.cput.dogparlor.repository.ContactRepository;
 import za.ac.cput.dogparlor.repository.CustomerRepository;
 import za.ac.cput.dogparlor.service.ICustomerService;
 
-import java.util.ArrayList;
 import java.util.List;
 
+@Component
 @Service
 public class CustomerService implements ICustomerService {
 
@@ -69,4 +70,41 @@ public class CustomerService implements ICustomerService {
         return retrievedCustomer;
     }
 
+    public void deleteContactFromCustomer(String customerId, String contactId) {
+        // Retrieve the customer entity
+        Customer optionalCustomer = repository.findById(customerId).orElse(null);
+
+        if (optionalCustomer != null) {
+
+            // Retrieve the contact list from the customer
+            List<Contact> contacts = optionalCustomer.getContacts();
+
+            // Find the contact to be deleted
+            Contact contactToBeDeleted = null;
+            for (Contact contact : contacts) {
+                if (contact.getContactValue().equals(contactId)) {
+                    contactToBeDeleted = contact;
+                    break;
+                }
+            }
+
+            if (contactToBeDeleted != null) {
+                // Remove the contact from the list
+                contacts.remove(contactToBeDeleted);
+
+                // Update the customer entity
+                Customer newCustomer = new Customer.Builder().copy(optionalCustomer).setContacts(contacts).build();
+                repository.save(newCustomer);
+            } else {
+                // Handle case when contact is not found
+                // Perhaps throw an exception or handle accordingly
+            }
+        } else {
+            // Handle case when customer is not found
+            // Perhaps throw an exception or handle accordingly
+        }
+    }
+
 }
+
+

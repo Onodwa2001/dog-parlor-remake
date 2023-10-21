@@ -6,6 +6,7 @@
 package za.ac.cput.dogparlor.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import za.ac.cput.dogparlor.domain.Booking;
 import za.ac.cput.dogparlor.factory.BookingFactory;
@@ -23,7 +24,9 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
 
+    // customer
     @PostMapping("/create")
+    @PreAuthorize("hasAuthority('USER')")
     public Booking createBooking(@RequestBody Booking booking){
         String dateString = booking.getBookingDate().toString();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
@@ -37,19 +40,25 @@ public class BookingController {
     }
 
     @PostMapping("/update")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Booking updateBooking(@RequestBody Booking booking) {
         return bookingService.update(booking);
     }
 
+    // customer and admin
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
     public boolean deleteBooking(@PathVariable String id) {
         return bookingService.delete(id);
     }
 
+    // admin
     @GetMapping("/getall")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<Booking> getAll() {
         return bookingService.getAll();
     }
+
 
     @PostMapping("/unavailable-dates")
     public HashMap<String, Integer> getUnavailableDates(@RequestBody ArrayList<String> monthYearStringParam) {

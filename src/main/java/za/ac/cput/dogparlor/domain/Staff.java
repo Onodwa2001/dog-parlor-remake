@@ -17,6 +17,8 @@ public class Staff implements Serializable {
 
     @Id
     private String staffNumber;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private User user;
     private String firstName, lastName;
     private String speciality;
 
@@ -27,6 +29,7 @@ public class Staff implements Serializable {
 
     private Staff(Builder builder) {
         this.staffNumber = builder.staffNumber;
+        this.user = builder.user;
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
         this.role = builder.role;
@@ -36,6 +39,10 @@ public class Staff implements Serializable {
 
     public String getStaffNumber() {
         return staffNumber;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public String getFirstName() {
@@ -60,18 +67,19 @@ public class Staff implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Staff staff = (Staff) o;
-        return Objects.equals(staffNumber, staff.staffNumber) && Objects.equals(firstName, staff.firstName) && Objects.equals(lastName, staff.lastName) && Objects.equals(speciality, staff.speciality) && Objects.equals(role, staff.role);
+        return Objects.equals(staffNumber, staff.staffNumber) && Objects.equals(user, staff.user) && Objects.equals(firstName, staff.firstName) && Objects.equals(lastName, staff.lastName) && Objects.equals(speciality, staff.speciality) && Objects.equals(role, staff.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(staffNumber, firstName, lastName, speciality, role);
+        return Objects.hash(staffNumber, user, firstName, lastName, speciality, role);
     }
 
     @Override
     public String toString() {
         return "Staff{" +
                 "staffNumber='" + staffNumber + '\'' +
+                ", user=" + user +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", speciality='" + speciality + '\'' +
@@ -82,6 +90,7 @@ public class Staff implements Serializable {
     public static class Builder {
 
         private String staffNumber;
+        private User user;
         private String firstName, lastName;
         private String speciality;
         private List<Role> role;
@@ -90,6 +99,11 @@ public class Staff implements Serializable {
 
         public Builder setStaffNumber(String staffNumber) {
             this.staffNumber = staffNumber;
+            return this;
+        }
+
+        public Builder setUser(User user) {
+            this.user = user;
             return this;
         }
 
@@ -116,6 +130,7 @@ public class Staff implements Serializable {
 
         public Builder copy(final Staff staff) {
             this.staffNumber = staff.staffNumber;
+            this.user = staff.user;
             this.firstName = staff.firstName;
             this.lastName = staff.lastName;
             this.role = staff.role;

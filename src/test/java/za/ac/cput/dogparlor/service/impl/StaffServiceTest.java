@@ -26,7 +26,7 @@ class StaffServiceTest {
     public StaffServiceTest() {
         List<Role> roles = new ArrayList<>();
         roles.add(new Role.Builder().setRoleID("someIdtest").setName("").build());
-        staff = StaffFactory.createStaff("Onodwa", "Siyotula", "SomeRole", roles);
+        staff = StaffFactory.createStaff(null, "Onodwa", "Siyotula", "SomeRole", roles);
     }
 
     @Order(1)
