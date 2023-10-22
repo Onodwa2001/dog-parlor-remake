@@ -6,9 +6,13 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoder;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedCaseInsensitiveMap;
+import za.ac.cput.dogparlor.domain.Customer;
+import za.ac.cput.dogparlor.domain.Staff;
+import za.ac.cput.dogparlor.domain.Admin;
 
 import java.security.Key;
 import java.util.Date;
@@ -17,6 +21,9 @@ import java.util.function.Function;
 
 @Component
 public class JwtService {
+
+    @Autowired
+    private CustomerService customerService;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -50,8 +57,15 @@ public class JwtService {
     }
 
 
-    public String generateToken(String username) {
+    public String generateToken(String username, Customer customer, Staff staff, Admin admin) {
         Map<String, Object> claims = new LinkedCaseInsensitiveMap<>();
+        if (customer != null) {
+            claims.put("customer", customer);
+        } else if (staff != null) {
+            claims.put("staff", staff);
+        } else if (admin != null) {
+            claims.put("admin", admin);
+        }
         return createToken(claims, username);
     }
 
@@ -60,7 +74,7 @@ public class JwtService {
                 .setClaims(claims)
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 10))
                 .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
     }
 

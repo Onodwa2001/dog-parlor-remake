@@ -9,7 +9,7 @@ public class AuthRequest {
 
     }
 
-    public AuthRequest(String username, String password) {
+    public AuthRequest(String username, String password, String role) {
         this.username = username;
         this.password = password;
     }
@@ -30,6 +30,7 @@ public class AuthRequest {
         this.password = password;
     }
 
+
     @Override
     public String toString() {
         return "AuthRequest{" +
@@ -37,5 +38,4 @@ public class AuthRequest {
                 ", password='" + password + '\'' +
                 '}';
     }
-
 }

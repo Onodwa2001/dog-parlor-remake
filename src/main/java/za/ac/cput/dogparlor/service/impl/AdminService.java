@@ -17,4 +17,8 @@ public class AdminService implements IAdminService<Admin, String> {
         return adminRepository.save(admin);
     }
 
+    public Admin getAdminByUsername(String username) {
+        return adminRepository.getAdminByUser_Username(username).orElse(null);
+    }
+
 }

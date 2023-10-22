@@ -53,6 +53,10 @@ public class CustomerService implements ICustomerService {
         return repository.findAll();
     }
 
+    public Customer getCustomerByUsername(String username) {
+        return repository.getCustomerByUser_Username(username).orElse(null);
+    }
+
     @Override
     public Customer getCustomerIfExists(Contact contactParam) {
         List<Customer> customers = getAll();

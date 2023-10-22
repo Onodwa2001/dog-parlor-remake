@@ -9,6 +9,7 @@ package za.ac.cput.dogparlor.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.ac.cput.dogparlor.domain.Booking;
+import za.ac.cput.dogparlor.domain.Staff;
 import za.ac.cput.dogparlor.repository.BookingRepository;
 import za.ac.cput.dogparlor.service.IBookingService;
 import za.ac.cput.dogparlor.util.Helper;
@@ -50,6 +51,10 @@ public class BookingService implements IBookingService {
             return true;
         }
         return false;
+    }
+
+    public List<Booking> getBookingsByStaffListContaining(Staff staff) {
+        return repository.getBookingsByStaffListContaining(staff).orElse(null);
     }
 
     public boolean isDayFullyBooked(LocalDateTime dateTime) {

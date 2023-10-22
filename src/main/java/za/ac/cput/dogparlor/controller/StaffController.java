@@ -35,7 +35,7 @@ public class StaffController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public Staff createStaff(@RequestBody Staff staff){
         String encodedPassword = encoder.encode(staff.getUser().getPassword());
-        User user = UserFactory.createUser(staff.getUser().getUsername(), encodedPassword, staff.getUser().getRole());
+        User user = UserFactory.createUser(staff.getUser().getUsername(), encodedPassword, "STAFF");
 
         System.out.println(user);
         Staff createdStaff = StaffFactory.createStaff(user, staff.getFirstName(),staff.getLastName(),
@@ -54,13 +54,16 @@ public class StaffController {
     @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public boolean deleteStaff(@PathVariable String id) {
+        staffService.deleteRoleFromStaff(id);
         return staffService.delete(id);
     }
 
     // admin
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/getall")
     @PreAuthorize("hasAuthority('ADMIN')")
     public List<Staff> getAll() {
+        System.out.println("You found me");
         return staffService.getAll();
     }
 }

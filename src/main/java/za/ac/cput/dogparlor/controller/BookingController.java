@@ -9,8 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import za.ac.cput.dogparlor.domain.Booking;
+import za.ac.cput.dogparlor.domain.Staff;
 import za.ac.cput.dogparlor.factory.BookingFactory;
 import za.ac.cput.dogparlor.service.impl.BookingService;
+import za.ac.cput.dogparlor.service.impl.StaffService;
+
 import java.time.format.DateTimeFormatter;
 
 import java.time.LocalDateTime;
@@ -23,6 +26,9 @@ import java.util.List;
 public class BookingController {
     @Autowired
     private BookingService bookingService;
+
+    @Autowired
+    private StaffService staffService;
 
     // customer
     @PostMapping("/create")
@@ -59,6 +65,12 @@ public class BookingController {
         return bookingService.getAll();
     }
 
+    @GetMapping("/get-bookings-by-staff-id/{id}")
+    @PreAuthorize("hasAuthority('STAFF')")
+    public List<Booking> getBookingsByStaffNumber(@PathVariable String id) {
+        Staff staff = staffService.read(id);
+        return bookingService.getBookingsByStaffListContaining(staff);
+    }
 
     @PostMapping("/unavailable-dates")
     public HashMap<String, Integer> getUnavailableDates(@RequestBody ArrayList<String> monthYearStringParam) {

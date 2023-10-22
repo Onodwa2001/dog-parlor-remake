@@ -42,7 +42,7 @@ public class SpringSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf().disable()
+        return http.csrf().disable().cors().and()
                 .authorizeHttpRequests()
                 .requestMatchers("/groomservice/getall", "/extra-service/getall",
                         "/customer/create", "/auth/authenticate", "/role/getall",

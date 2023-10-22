@@ -76,6 +76,7 @@ public class CustomerController {
     @PostMapping("/update")
     @PreAuthorize("hasAuthority('USER')")
     public Customer updateCustomer(@RequestBody Customer customer) {
+        System.out.println(customer);
         return customerService.update(customer);
     }
 
